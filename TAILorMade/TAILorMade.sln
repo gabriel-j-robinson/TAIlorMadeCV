@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAILorMade", "TAILorMade.csproj", "{8B2EAF4A-1946-4120-BED6-B891FFF9B04D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAILorMadeMain", "..\TAILorMadeMain\TAILorMadeMain.csproj", "{31502A8C-2471-4078-9BC5-190CB5D313F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAILorMadeLib", "..\TAILorMadeLib\TAILorMadeLib.csproj", "{1EF1E486-0814-401D-9777-413DF094544C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B2EAF4A-1946-4120-BED6-B891FFF9B04D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B2EAF4A-1946-4120-BED6-B891FFF9B04D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B2EAF4A-1946-4120-BED6-B891FFF9B04D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B2EAF4A-1946-4120-BED6-B891FFF9B04D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31502A8C-2471-4078-9BC5-190CB5D313F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31502A8C-2471-4078-9BC5-190CB5D313F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31502A8C-2471-4078-9BC5-190CB5D313F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31502A8C-2471-4078-9BC5-190CB5D313F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EF1E486-0814-401D-9777-413DF094544C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EF1E486-0814-401D-9777-413DF094544C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EF1E486-0814-401D-9777-413DF094544C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EF1E486-0814-401D-9777-413DF094544C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
