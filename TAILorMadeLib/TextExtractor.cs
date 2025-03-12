@@ -6,9 +6,12 @@ namespace TAILorMadeLib
 {
     public class TextExtractor
     {
-        public static string ExtractTextFromPdf([FromForm] IFormFile resumePdf)
+        public static string ExtractTextFromPdf([FromForm] IFormFile file)
         {
-            throw new NotImplementedException();
+            if (file == null || file.Length == 0)
+            {
+
+            }
         }
     }
 }
