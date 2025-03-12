@@ -10,8 +10,8 @@ namespace TAILorMadeLib.Model
     {
         public string model { get; set; }
         public Message[] messages { get; set; }
-        public double temperature { get; set; }
-        public int max_tokens { get; set; }
+        //public double temperature { get; set; }
+        //public int max_tokens { get; set; }
 
     }
 

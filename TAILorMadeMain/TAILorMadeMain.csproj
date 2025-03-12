@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TAILorMadeLib\TAILorMadeLib.csproj">
+      <Project>{1EF1E486-0814-401D-9777-413DF094544C}</Project>
+      <Name>TAILorMadeLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

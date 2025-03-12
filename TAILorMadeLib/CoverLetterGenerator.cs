@@ -13,7 +13,7 @@ namespace TAILorMadeLib
         private static readonly string apiKey = Environment.GetEnvironmentVariable("MY_CHATGPT_KEY");
         private static readonly string endpoint = "https://api.openai.com/v1/chat/completions";
 
-        static async Task<string> GenerateCoverLetter(string jobDescription, string userBackground)
+        public static async Task<string> GenerateCoverLetter(string jobDescription, string userBackground)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -21,14 +21,12 @@ namespace TAILorMadeLib
 
                 var requestBody = new Request()
                 {
-                    model = "gpt-4",
+                    model = "gpt-4o",
                     messages = new Message[]
                     {
                         new Message() { role = "system", content = "You are an AI specialized in writing professional cover letters." },
                         new Message() { role = "user", content = $"Write a personalized cover letter for a job with the following description: {jobDescription}. The candidate has the following background: {userBackground}" }
-                    },
-                    temperature = 0.7,
-                    max_tokens = 500
+                    }
                 };
 
                 string jsonRequest = JsonSerializer.Serialize(requestBody);
