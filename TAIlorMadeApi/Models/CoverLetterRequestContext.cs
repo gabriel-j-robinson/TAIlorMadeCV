@@ -6,6 +6,6 @@ namespace TAIlorMadeApi.Models
     {
         public CoverLetterRequestContext(DbContextOptions<CoverLetterRequestContext> options) : base(options) { }
 
-        public DbSet<CoverLetterRequest> Requests { get; set; }
+        public DbSet<CoverLetterRequest> CoverLetterRequests { get; set; }
     }
 }
