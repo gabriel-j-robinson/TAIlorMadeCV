@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TAIlorMadeLibTests
 {
@@ -9,11 +8,13 @@ namespace TAIlorMadeLibTests
         [TestMethod]
         public void PdfTextExtractionTest1()
         {
+            
         }
 
         [TestMethod]
         public void DocxTextExtractionTest1()
         {
+
         }
     }
 }
