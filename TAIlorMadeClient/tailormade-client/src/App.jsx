@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { UploadCloud } from "lucide-react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function JobApplication() {
   const [jobDescription, setJobDescription] = useState("");
@@ -15,34 +16,40 @@ export default function JobApplication() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
-      <div className="w-full max-w-lg p-6 bg-white shadow-md rounded-xl">
-        <h2 className="text-xl font-semibold mb-4">Generate Cover Letter</h2>
+    <div className="d-flex justify-content-center align-items-center min-vh-100 min-vw-100 bg-light">
+      <div className="card shadow-lg p-4 w-100 text-center" style={{ maxWidth: "500px" }}>
+        <div className="card-body">
+          <h2 className="card-title text-center mb-4">Generate Cover Letter</h2>
+          
+          <div className="mb-3 text-start">
+            <label className="form-label">Job Description</label>
+            <textarea
+              className="form-control"
+              placeholder="Enter job description..."
+              value={jobDescription}
+              onChange={(e) => setJobDescription(e.target.value)}
+              rows="4"
+            />
+          </div>
 
-        <textarea
-          placeholder="Enter job description..."
-          value={jobDescription}
-          onChange={(e) => setJobDescription(e.target.value)}
-          className="w-full h-32 p-2 border rounded-md"
-        />
+          <div className="mb-3 text-start">
+            <label className="form-label">Attach Resume (PDF or DOCX)</label>
+            <input
+              type="file"
+              className="form-control"
+              accept=".pdf,.docx"
+              onChange={handleFileChange}
+            />
+          </div>
 
-        <div className="mt-4">
-          <label className="block text-sm font-medium">Attach Resume (PDF or DOCX)</label>
-          <input
-            type="file"
-            accept=".pdf,.docx"
-            onChange={handleFileChange}
-            className="w-full border p-2 rounded-md"
-          />
+          {selectedFile && (
+            <p className="text-success fw-semibold">Selected file: {selectedFile.name}</p>
+          )}
+
+          <button className="btn btn-primary w-100 d-flex align-items-center justify-content-center">
+            <UploadCloud size={16} className="me-2" /> Submit
+          </button>
         </div>
-
-        {selectedFile && (
-          <p className="text-sm text-green-600 mt-2">Selected file: {selectedFile.name}</p>
-        )}
-
-        <button className="w-full bg-blue-600 text-white py-2 mt-4 rounded-lg flex items-center justify-center gap-2">
-          <UploadCloud size={16} /> Submit
-        </button>
       </div>
     </div>
   );
