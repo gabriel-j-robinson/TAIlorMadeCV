@@ -13,6 +13,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.OperationFilter<SwaggerFileUploadOperationFilter>();
 });
+builder.Services.AddCors();
 
 var app = builder.Build();
 
