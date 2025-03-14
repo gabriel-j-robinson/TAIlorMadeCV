@@ -1,15 +1,18 @@
 using TAIlorMadeApi.Models;
 using Microsoft.EntityFrameworkCore;
+using TAIlorMadeApi;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddDbContext<ResumeRequestContext>(opt =>
+    opt.UseInMemoryDatabase("ResumeRequestDB"));
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<CoverLetterRequestContext>(opt =>
-    opt.UseInMemoryDatabase("CoverLetterRequestList"));
+builder.Services.AddSwaggerGen(c =>
+{
+    c.OperationFilter<SwaggerFileUploadOperationFilter>();
+});
 
 var app = builder.Build();
 

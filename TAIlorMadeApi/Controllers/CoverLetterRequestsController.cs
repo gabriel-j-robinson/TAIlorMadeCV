@@ -1,75 +1,102 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TAIlorMadeApi.Models;
-using TAILorMadeLib;
+﻿//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.EntityFrameworkCore;
+//using TAIlorMadeApi.Models;
 
-namespace TAIlorMadeApi.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CoverLetterRequestsController : ControllerBase
-    {
-        private readonly CoverLetterRequestContext _dbContext;
+//namespace TAIlorMadeApi.Controllers
+//{
+//    [Route("api/[controller]")]
+//    [ApiController]
+//    public class CoverLetterRequestsController : ControllerBase
+//    {
+//        private readonly CoverLetterRequestContext _context;
 
-        public CoverLetterRequestsController(CoverLetterRequestContext context)
-        {
-            _dbContext = context;
-        }
+//        public CoverLetterRequestsController(CoverLetterRequestContext context)
+//        {
+//            _context = context;
+//        }
 
-        [HttpPost("generate-async")]
-        public IActionResult GenerateCoverLetterAsync([FromForm] IFormFile resumePdf, [FromForm] string jobDescription)
-        {
-            if (resumePdf == null || resumePdf.Length == 0)
-                return BadRequest("Resume file is required.");
+//        // GET: api/CoverLetterRequests
+//        [HttpGet]
+//        public async Task<ActionResult<IEnumerable<CoverLetterRequest>>> GetCoverLetterRequests()
+//        {
+//            return await _context.CoverLetterRequests.ToListAsync();
+//        }
 
-            string extractedText = TextExtractor.ExtractTextFromPdf(resumePdf);
+//        // GET: api/CoverLetterRequests/5
+//        [HttpGet("{id}")]
+//        public async Task<ActionResult<CoverLetterRequest>> GetCoverLetterRequest(Guid id)
+//        {
+//            var coverLetterRequest = await _context.CoverLetterRequests.FindAsync(id);
 
-            var request = new CoverLetterRequest
-            {
-                JobDescription = jobDescription,
-                ResumeText = extractedText,
-            };
+//            if (coverLetterRequest == null)
+//            {
+//                return NotFound();
+//            }
 
-            _dbContext.CoverLetterRequests.Add(request);
-            _dbContext.SaveChanges();
+//            return coverLetterRequest;
+//        }
 
-            // Schedule background job
-            Hangfire.BackgroundJob.Enqueue(() => ProcessCoverLetter(request.Id));
+//        // PUT: api/CoverLetterRequests/5
+//        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+//        [HttpPut("{id}")]
+//        public async Task<IActionResult> PutCoverLetterRequest(Guid id, CoverLetterRequest coverLetterRequest)
+//        {
+//            if (id != coverLetterRequest.Id)
+//            {
+//                return BadRequest();
+//            }
 
-            return Ok(new { jobId = request.Id });
-        }
+//            _context.Entry(coverLetterRequest).State = EntityState.Modified;
 
-        public async Task ProcessCoverLetter(Guid requestId)
-        {
-            var request = _dbContext.CoverLetterRequests.Find(requestId);
-            if (request == null) return;
+//            try
+//            {
+//                await _context.SaveChangesAsync();
+//            }
+//            catch (DbUpdateConcurrencyException)
+//            {
+//                if (!CoverLetterRequestExists(id))
+//                {
+//                    return NotFound();
+//                }
+//                else
+//                {
+//                    throw;
+//                }
+//            }
 
-            try
-            {
-                request.CoverLetter = await CoverLetterGenerator.GenerateCoverLetter(request.JobDescription, request.ResumeText);
-                request.Status = "Completed";
-            }
-            catch
-            {
-                request.Status = "Failed";
-            }
+//            return NoContent();
+//        }
 
-            _dbContext.SaveChanges();
-        }
+//        // POST: api/CoverLetterRequests
+//        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+//        [HttpPost]
+//        public async Task<ActionResult<CoverLetterRequest>> PostCoverLetterRequest(CoverLetterRequest coverLetterRequest)
+//        {
+//            _context.CoverLetterRequests.Add(coverLetterRequest);
+//            await _context.SaveChangesAsync();
 
-        [HttpGet("status/{jobId}")]
-        public IActionResult GetCoverLetterStatus(Guid jobId)
-        {
-            var request = _dbContext.CoverLetterRequests.Find(jobId);
-            if (request == null)
-                return NotFound(new { message = "Job not found" });
+//            return CreatedAtAction("GetCoverLetterRequest", new { id = coverLetterRequest.Id }, coverLetterRequest);
+//        }
 
-            return Ok(new { status = request.Status, coverLetter = request.CoverLetter });
-        }
-    }
-}
+//        // DELETE: api/CoverLetterRequests/5
+//        [HttpDelete("{id}")]
+//        public async Task<IActionResult> DeleteCoverLetterRequest(Guid id)
+//        {
+//            var coverLetterRequest = await _context.CoverLetterRequests.FindAsync(id);
+//            if (coverLetterRequest == null)
+//            {
+//                return NotFound();
+//            }
+
+//            _context.CoverLetterRequests.Remove(coverLetterRequest);
+//            await _context.SaveChangesAsync();
+
+//            return NoContent();
+//        }
+
+//        private bool CoverLetterRequestExists(Guid id)
+//        {
+//            return _context.CoverLetterRequests.Any(e => e.Id == id);
+//        }
+//    }
+//}

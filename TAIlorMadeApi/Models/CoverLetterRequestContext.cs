@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿//using Microsoft.EntityFrameworkCore;
 
-namespace TAIlorMadeApi.Models
-{
-    public class CoverLetterRequestContext : DbContext
-    {
-        public CoverLetterRequestContext(DbContextOptions<CoverLetterRequestContext> options) : base(options) { }
+//namespace TAIlorMadeApi.Models
+//{
+//    public class CoverLetterRequestContext : DbContext
+//    {
+//        public CoverLetterRequestContext(DbContextOptions<CoverLetterRequestContext> options) : base(options) { }
 
-        public DbSet<CoverLetterRequest> CoverLetterRequests { get; set; }
-    }
-}
+//        public DbSet<CoverLetterRequest> CoverLetterRequests { get; set; }
+//    }
+//}
