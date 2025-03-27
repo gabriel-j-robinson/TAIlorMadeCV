@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Security.Policy;
+using Microsoft.EntityFrameworkCore;
 
 namespace TAIlorMadeApi.Models
 {
@@ -8,6 +9,8 @@ namespace TAIlorMadeApi.Models
             : base(options) { }
 
         public DbSet<ResumeRequest> ResumeRequests { get; set; }
+
+        public DbSet<CoverLetterRequest> CoverLetterRequests { get; set; }
     }
 
 }
