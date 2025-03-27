@@ -1,13 +1,25 @@
-using TAIlorMadeApi.Models;
-using Microsoft.EntityFrameworkCore;
 using TAIlorMadeApi;
+using TAIlorMadeApi.Models;
+using TAIlorMadeApi.Jobs;
+using Microsoft.EntityFrameworkCore;
+using Hangfire;
+using Hangfire.MemoryStorage;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Hangfire services
+builder.Services.AddHangfire(config =>
+{
+    config.UseMemoryStorage();
+});
+builder.Services.AddHangfireServer();
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ResumeRequestContext>(opt =>
     opt.UseInMemoryDatabase("ResumeRequestDB"));
+builder.Services.AddScoped<CoverLetterJob>();
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
