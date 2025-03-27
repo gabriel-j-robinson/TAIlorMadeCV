@@ -25,34 +25,7 @@ namespace TAILorMadeLib
 
                 string date = DateTime.Today.ToString("MMMM d, yyyy");
 
-                var promptBuilder = new StringBuilder();
-
-                promptBuilder.AppendLine("You are an expert AI assistant that writes professional, tailored cover letters for job applications.");
-                promptBuilder.AppendLine();
-                promptBuilder.AppendLine("Please analyze the job description below and extract any context that is explicitly available, such as:");
-                promptBuilder.AppendLine("- Company name");
-                promptBuilder.AppendLine("- Job title");
-                promptBuilder.AppendLine("- Technologies or skills mentioned");
-                promptBuilder.AppendLine();
-                promptBuilder.AppendLine("Then write a professional, persuasive, and personalized cover letter for the job, using the candidate’s background.");
-                promptBuilder.AppendLine();
-                promptBuilder.AppendLine("**Important rules:**");
-                promptBuilder.AppendLine("- If the job description does NOT mention the company name, recipient name, or address, DO NOT use placeholders like [Company Name] or [Hiring Manager’s Name].");
-                promptBuilder.AppendLine("- Simply omit those sections or write naturally around them.");
-                promptBuilder.AppendLine("- Do NOT add a letterhead with the applicant’s contact info — only generate the body of the letter and closing.");
-                promptBuilder.AppendLine("- Do NOT repeat the job description verbatim.");
-                promptBuilder.AppendLine("- Use a warm, confident, and professional tone.");
-                promptBuilder.AppendLine();
-                promptBuilder.AppendLine("Job Description:");
-                promptBuilder.AppendLine(jobDescription);
-                promptBuilder.AppendLine();
-                promptBuilder.AppendLine("Candidate Background:");
-                promptBuilder.AppendLine(userBackground);
-                promptBuilder.AppendLine();
-                promptBuilder.AppendLine("Date: " + DateTime.Today.ToString("MMMM d, yyyy"));
-
-                if (!string.IsNullOrWhiteSpace(githubUrl))
-                    promptBuilder.AppendLine("GitHub Profile: " + githubUrl);
+                string prompt = PromptBuilder.BuildCoverLetterPrompt(jobDescription, userBackground, githubUrl);
 
                 var requestBody = new Request()
                 {
@@ -67,7 +40,7 @@ namespace TAILorMadeLib
                         new Message
                         {
                             role = "user",
-                            content = promptBuilder.ToString()
+                            content = prompt
                     }
                     }
                 };

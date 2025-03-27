@@ -214,6 +214,7 @@
     <Compile Include="CoverLetterGenerator.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Model\Request.cs" />
+    <Compile Include="PromptBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextExtractor.cs" />
   </ItemGroup>
