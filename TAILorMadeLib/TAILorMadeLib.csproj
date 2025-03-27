@@ -216,6 +216,7 @@
     <Compile Include="Model\Request.cs" />
     <Compile Include="PromptBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResumeSummarizer.cs" />
     <Compile Include="TextExtractor.cs" />
   </ItemGroup>
   <ItemGroup>

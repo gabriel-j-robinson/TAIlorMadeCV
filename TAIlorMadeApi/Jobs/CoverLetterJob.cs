@@ -6,6 +6,7 @@ namespace TAIlorMadeApi.Jobs
     public class CoverLetterJob
     {
         private readonly ResumeRequestContext _context;
+
         public CoverLetterJob(ResumeRequestContext context)
         {
             _context = context;
@@ -29,9 +30,13 @@ namespace TAIlorMadeApi.Jobs
 
             try
             {
-                string result = await CoverLetterGenerator.GenerateCoverLetter(request.JobDescription, resume.ResumeText);
+                var userBackground = await ResumeSummarizer.GetBackgroundForPrompt(resume.ResumeText);
+                var coverLetter = await CoverLetterGenerator.GenerateCoverLetter(
+                    request.JobDescription,
+                    userBackground
+                );
 
-                request.CoverLetter = result;
+                request.CoverLetter = coverLetter;
                 request.Status = "Completed";
             }
             catch
