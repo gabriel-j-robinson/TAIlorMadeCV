@@ -30,7 +30,18 @@ namespace TAIlorMadeApi.Jobs
 
             try
             {
-                var userBackground = await ResumeSummarizer.GetBackgroundForPrompt(resume.ResumeText);
+                string userBackground;
+                if (!string.IsNullOrWhiteSpace(request.ResumeSummary) && request.SummaryEditedByUser)
+                {
+                    userBackground = request.ResumeSummary;
+                }
+                else
+                {
+                    userBackground = await ResumeSummarizer.GetBackgroundForPrompt(resume.ResumeText);
+                    request.ResumeSummary = userBackground;
+                    request.SummaryEditedByUser = false;
+                }
+
                 var coverLetter = await CoverLetterGenerator.GenerateCoverLetter(
                     request.JobDescription,
                     userBackground

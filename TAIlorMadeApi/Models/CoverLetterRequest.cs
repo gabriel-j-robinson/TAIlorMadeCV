@@ -7,5 +7,7 @@
         public string? JobDescription { get; set; }
         public string? CoverLetter { get; set; }
         public string Status { get; set; } = "Pending";
+        public string? ResumeSummary { get; set; } // Editable summary
+        public bool SummaryEditedByUser { get; set; } = false;
     }
 }
