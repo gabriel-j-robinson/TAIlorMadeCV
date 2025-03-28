@@ -4,6 +4,7 @@ using TAIlorMadeApi.Jobs;
 using Microsoft.EntityFrameworkCore;
 using Hangfire;
 using Hangfire.MemoryStorage;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +16,8 @@ builder.Services.AddHangfire(config =>
 builder.Services.AddHangfireServer();
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<ResumeRequestContext>(opt =>
-    opt.UseInMemoryDatabase("ResumeRequestDB"));
+builder.Services.AddDbContext<ResumeRequestContext>(options =>
+    options.UseNpgsql("Host=localhost;Port=5432;Database=tailormade;Username=postgres;Password=GR2756sc1!"));
 builder.Services.AddScoped<CoverLetterJob>();
 
 
