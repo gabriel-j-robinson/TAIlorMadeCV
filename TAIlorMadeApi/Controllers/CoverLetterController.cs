@@ -73,7 +73,7 @@ namespace TAIlorMadeApi.Controllers
 
             var resume = await _context.ResumeRequests.FindAsync(request.ResumeId);
 
-            if (request == null || resume == null) return NotFound();
+            if (resume == null) return NotFound();
 
             var summary = await ResumeSummarizer.GetBackgroundForPrompt(resume.ResumeText);
 
