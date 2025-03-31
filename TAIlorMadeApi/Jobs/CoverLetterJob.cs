@@ -17,6 +17,8 @@ namespace TAIlorMadeApi.Jobs
             var request = await _context.CoverLetterRequests.FindAsync(requestId);
             if (request == null) return;
 
+            if (request.Status != "Pending") return; 
+
             var resume = await _context.ResumeRequests.FindAsync(request.ResumeId);
             if (resume == null)
             {
@@ -30,17 +32,7 @@ namespace TAIlorMadeApi.Jobs
 
             try
             {
-                string userBackground;
-                if (!string.IsNullOrWhiteSpace(request.ResumeSummary) && request.SummaryEditedByUser)
-                {
-                    userBackground = request.ResumeSummary;
-                }
-                else
-                {
-                    userBackground = await ResumeSummarizer.GetBackgroundForPrompt(resume.ResumeText);
-                    request.ResumeSummary = userBackground;
-                    request.SummaryEditedByUser = false;
-                }
+                string userBackground = request.ResumeSummary ?? "";
 
                 var coverLetter = await CoverLetterGenerator.GenerateCoverLetter(
                     request.JobDescription,
